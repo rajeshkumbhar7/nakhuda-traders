@@ -1,0 +1,141 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>Nakhuda Traders</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/NT3_bg-removed.png' %}"/>
+  <style>
+    body {
+      background-color: #4DB7D1;
+      min-height:100vh;
+    }
+    @media print {
+      .noPrint{
+        display:none;
+      }
+    }
+  </style>
+  
+    <script src="{% static 'js/myjs.js' %}"></script>
+</head>
+<body>
+  
+<div class="vertical-nav bg-white noPrint" id="sidebar">
+    <div class="py-4 px-3 mb-1 bg-light">
+      
+        <p class="fw-bolder text-uppercase px-2 small dashboard-text text-center" style="color: #ff416c; font-size: 25px; ">Nakhuda Traders</p>
+        <div class="media d-flex align-items-center">
+            <img src="{% static 'images/NT1.png' %}" width="80" height="80"
+                 class="mr-3 rounded-circle img-thumbnail shadow-sm">
+            <div class="media-body" style="margin: 1rem;">
+                <h4 class="mb-0">Admin</h4>
+                <p class="text-muted mb-0">{{request.user.email}}</p>
+            </div>
+        </div>
+    </div>
+
+
+  
+    <ul class="nav flex-column bg-white">
+        <li class="nav-item">
+            <a href="{% url 'admin_dashboard' %}" class="nav-link text-dark bg-light">
+                <i class="fas fa-tachometer-alt fa-fw mr-3 text-primary"></i>
+                Dashboard
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a href="{% url 'view_category' %}" class="nav-link text-dark bg-light">
+                <i class="fas fa-list mr-3 text-primary fa-fw"></i>
+                Category
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{% url 'view_product' %}" class="nav-link text-dark bg-light">
+                <i class="fas fa-warehouse mr-3 text-primary fa-fw"></i>
+                Inventory
+            </a>
+        </li>
+      
+        <li class="nav-item">
+            <a href="{% url 'view_cart' %}" class="nav-link text-dark bg-light">
+                <i class="fas fa-shopping-cart mr-3 text-primary fa-fw"></i>
+                Cart<span class="ms-2 badge bg-primary">{{ cart_count }}</span>
+            </a>
+        </li>
+
+      
+        <li class="nav-item">
+            <a href="{% url 'view_invoice_history' %}" class="nav-link text-dark bg-light">
+                <i class="fas fa-regular fa-file-invoice mr-3 text-primary fa-fw"></i>
+                Invoice History
+            </a>
+        </li>
+      
+      
+        <li class="nav-item">
+            <a href="{% url 'notification_list' %}" class="nav-link text-dark bg-light">
+                <i class="fas fa-exclamation mr-3 text-primary fa-fw"></i>
+                Notification<span class="ms-2 badge bg-primary">{{ notify_count }}</span>
+            </a>
+        </li>
+
+      
+        <li class="nav-item">
+            <a href="/admin-change-password/" class="nav-link text-dark bg-light">
+                <i class="fas fa-cog mr-3 text-primary fa-fw"></i>
+                Change Password
+            </a>
+        </li>
+      
+        <li class="nav-item">
+            <a href="/logout/" class="nav-link text-dark bg-light">
+                <i class="fas fa-sign-out-alt mr-3 text-primary fa-fw"></i>
+                Logout
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+
+
+  
+  
+<div class="page-content p-4" id="content">
+    <a href="/logout/" title="Logout" class="noPrint float-right text-white" style="float: right;"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+
+  
+    <button id="sidebarCollapse" type="button" class=" noPrint btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+        <i class="fas fa-bars mr-2"></i>
+        <small class="text-uppercase fw-bold">Toggle</small>
+    </button>
+  
+ 
+    {% block main %}
+    {% endblock %}
+</div>
+
+
+{% for i in messages %}
+<script>
+    alert('{{i}}');
+</script>
+{% endfor %}
+
+
+
+</body>
+</html>

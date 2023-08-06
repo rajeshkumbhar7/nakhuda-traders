@@ -1,0 +1,122 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block body %}
+
+
+
+
+
+
+<style>
+/*   body {
+    background-image : url({% static 'images/shop-img-4.jpg' %});  
+background-repeat: no-repeat;  background-attachment: fixed;  background-size: 100% 100%; 
+  }
+  .admin-card {
+    opacity: 95%;
+  } */
+  body {
+/*     background-image: linear-gradient(135.9deg,#655DBB 16%,#BFACE2 86%); */
+    background-image: linear-gradient(135.9deg,#36d1dc 10%,#5b86e5 80%);
+    height: 100vh;
+  }
+</style>
+
+
+
+<hr class="mt-0">
+<div class="">
+  <div class="col-lg-5 m-auto">
+    <div class="card mt-5 bg-dark  admin-card">
+      <div class="card-title text-center mt-3">
+          <img src="{% static 'images/NT1.png' %}" width="150" height="150" class="mb-4 rounded-circle mx-auto d-block" >
+          <h2 class="text-white">Admin Login(Index Page)</h2>
+      </div>
+      <div class="card-body">
+        <form method="post" action="">
+          {% csrf_token %}
+          
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+                <i class="fa fa-user fa-2x"></i>
+            </span>
+            <input type="text" name="username" class="form-control" placeholder="Username" >
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+                <i class="fa fa-lock fa-2x"></i>
+            </span>
+            <input type="password" name="password" class="form-control" placeholder="Password" >
+          </div>
+
+          <input type="submit" value="Login" class="btn btn-success px-5">
+
+            <a href="{% url 'admin_login' %}" class="float-right mt-2 text-white"  style="float: right;"><i class="fas fa-angle-double-left"></i> Go Back To HomePage </i></a>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% for i in messages %}
+<script>
+    alert('{{i}}');
+</script>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<style>
+    img{
+        height: 35rem;
+    }
+    .carousel-caption {
+        background-color: rgba(0,0,0,0.5);
+    }
+</style>
+
+
+
+<div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        {% for i in data %}
+        <div class="carousel-item active">
+            <img src="{{i.image.url}}" class="d-block w-100" alt="{{i.title}}">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>{{i.title}}</h5>
+                <p>{{i.description}}</p>
+            </div>
+        </div>
+        {% endfor %} 
+      
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+ -->
+
+{% endblock %}

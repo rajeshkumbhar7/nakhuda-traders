@@ -1,0 +1,110 @@
+{% extends 'admin_base.html' %}
+
+{% block main %}
+<div class="card shadow">
+  <div class="card-body">
+
+    <div class="container-fluid d-flex mb-3"  style="border-bottom: 2px solid orange;">
+      <div class="me-auto p-2"><h5 class="d-inline">Cart</h5></div>
+      <div class="p-2"><a href="{% url 'view_product' %}" class="text-success float-end me-3"><button type="button" class="btn btn-primary btn-sm">Add Product</button></a></div>
+    </div>
+
+
+    
+    <div class="container-fluid mb-5">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="customer_name" class="form-label">Customer Name</label>
+            <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="customer_mobile" class="form-label">Customer Mobile Number</label>
+            <input type="text" class="form-control" id="customer_mobile" name="customer_mobile" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Mode of Payment</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="payment_mode" id="cash" value="Cash" checked>
+              <label class="form-check-label" for="cash">
+                Cash
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="payment_mode" id="card" value="Card">
+              <label class="form-check-label" for="card">
+                Card
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="payment_mode" id="credit" value="Credit">
+              <label class="form-check-label" for="credit">
+                Credit
+              </label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <input type="reset" value="Clear" class="btn btn-danger "> 
+      </form>
+    </div>
+
+
+    
+    <div class="container-fluid">
+      <p class="text-center fw-bolder fs-2">Product Cart</p>
+      {% if cart_items %}
+      <table class="table table-bordered table-sm" id="example">
+        <thead>
+          <tr>
+            <th>S. No.</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Selling Price</th>
+            <th>Quantity</th>
+            <th>Subtotal Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart_items %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ item.product.product_id }}</td>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.product.category.name }}</td>
+              <td>{{ item.product.selling_price }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.total_price }}</td>
+              <td>
+                <a href="{% url 'remove_from_cart' item.pk %}" class="text-danger" onclick="return confirm('Are You Sure?')"><button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash mr-3 text-light fa-fw"></i></button></a>
+              </td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="6" class="text-end fw-bold">Grand Total</td>
+            <td>{{ grand_total }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      {% comment %}
+      <form action="{% url 'create_invoice' cart_id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Create Invoice</button>
+      </form>
+      {% endcomment %}
+      
+      {% else %}
+        <div class="alert alert-warning text-center" role="alert">
+          Your Cart is Empty
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

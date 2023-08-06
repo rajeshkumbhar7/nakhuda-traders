@@ -1,0 +1,74 @@
+{% extends 'admin_base.html' %}
+
+{% block main %}
+<div class="card shadow">
+  <div class="card-body">
+    <div class="container-fluid d-flex mb-3"  style="border-bottom: 2px solid orange;">
+      <div class="me-auto p-2"><h5 class="d-inline">Add Stock</h5></div>
+      <div class="p-2"><a href="{% url 'notification_list' %}" class="text-success float-end me-3"><button type="button" class="btn btn-primary btn-sm">Back to Notifications</button></a></div>
+    </div>
+
+    <div class="container-fluid">
+      <form method="POST" action="{% url 'add_stock' pk=product.pk %}">
+        {% csrf_token %}
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Product ID</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ product.product_id }}" disabled>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Product Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ product.name }}" disabled>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Category</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ product.category.name }}" disabled>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Cost Price</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ product.cost_price }}" disabled>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Selling Price</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ product.selling_price }}" disabled>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Current Stock</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ product.stock }}" disabled>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="quantity" class="col-sm-2 col-form-label">Add Stock</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="quantity" name="quantity" min="1"  required>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <div class="col-sm-12 text-end">
+            <button type="submit" class="btn btn-primary">Add Stock</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

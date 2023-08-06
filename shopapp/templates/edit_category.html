@@ -1,0 +1,30 @@
+{% extends 'admin_base.html' %}
+{% block main %}
+
+<div class="card shadow">
+    <div class="card-body">
+<!--         <h5 class="p-2" style="border-bottom: 2px solid orange;">Update Category</h5> -->
+      <div class="container-fluid d-flex mb-3" style="border-bottom: 2px solid orange;">
+      <div class="me-auto p-2"><h5 class="d-inline">Update Category</h5></div>
+      <div class="p-2"><a href="{% url 'view_category' %}" class="text-success float-end me-3"><button type="button" class="btn btn-primary btn-sm">Back to All Categories</button></a></div>
+    </div>
+      
+        <div class="container-fluid">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Category Name</label>
+                            <input type="text" name="name" class="form-control" value="{{category.name}}" placeholder="Category Name" required  autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="m-2 px-3 btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock style %}
+
+{% block body %}
+
+<div class="about">
+<h1>Bill Generation</h1>
+
+<div class="form-box">
+<form method="post">
+    {% csrf_token %}
+
+  <div class="form-line">Customer Name: <input type="text" name="customer_name"></div>
+  <div class="form-line">Bill Number: <input type="text" name="bill_number"></div>
+  
+  <div class="form-line">Products:</div>
+  
+  <div class="inv-table">
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td><input type="number" name="quantities" min="0" max="{{ product.quantity }}"></td>
+            <input type="hidden" name="products" value="{{ product.id }}">
+        </tr>
+        {% endfor %}
+    </table>
+  </div>
+    <input type="submit" value="Generate Bill"  class="btn-blue btn-button" style="margin-top: 20px;">
+</form>
+</div>
+  
+</div>
+
+  <span style="display: block; height: 20px; "> &nbsp; </span>
+
+{% endblock body %}

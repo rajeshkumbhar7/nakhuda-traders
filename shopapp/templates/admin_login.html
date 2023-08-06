@@ -1,0 +1,70 @@
+{% load static %}
+<html>
+<head>
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/NT3_bg-removed.png' %}"/>
+</head>
+
+<body id="login">
+  
+
+<style>
+/*.admin-card {
+    opacity: 95%;
+  } */
+  body {
+/*      background-image: linear-gradient(135.9deg,#655DBB 16%,#BFACE2 86%); */
+/*      background-image: linear-gradient(135.9deg,#36d1dc 10%,#5b86e5 80%); */
+     background-image: linear-gradient(135.9deg,#4DB7D1 10%,#4DB7D1 80%);
+  }
+</style>
+
+  
+{% include 'navigation.html' %}
+
+<hr class="mt-0">
+<div class="">
+  <div class="col-lg-5 m-auto">
+    <div class="card shadow mt-5 bg-dark  admin-card">
+      <div class="card-title text-center mt-3">
+          <img src="{% static 'images/NT1.png' %}" width="150" height="150" class="mb-4 rounded-circle mx-auto d-block" >
+          <h2 class="text-white">Admin Login</h2>
+      </div>
+      <div class="card-body">
+        <form method="post" action="">
+          {% csrf_token %}
+          
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+                <i class="fa fa-user fa-2x"></i>
+            </span>
+            <input type="text" name="username" class="form-control" placeholder="Username" >
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+                <i class="fa fa-lock fa-2x"></i>
+            </span>
+            <input type="password" name="password" class="form-control" placeholder="Password" >
+          </div>
+
+          <input type="submit" value="Login" class="btn btn-success px-5">
+<!-- 
+            <a href="" class="float-right mt-2 text-white"  style="float: right;">Forgot Password? </i></a>
+ -->
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% for i in messages %}
+<script>
+    alert('{{i}}');
+</script>
+{% endfor %}
+
+
+
+</body>

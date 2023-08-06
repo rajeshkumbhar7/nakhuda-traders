@@ -1,0 +1,51 @@
+{% extends 'admin_base.html' %}
+
+{% block main %}
+  <div class="container">
+    <h1>Invoice Detail</h1>
+    <hr>
+    <h2>Invoice ID: {{ invoice.id }}</h2>
+    <h3>Customer Details</h3>
+    <p>Name: {{ invoice.customer_name }}</p>
+    <p>Mobile Number: {{ invoice.customer_mobile }}</p>
+    <p>Payment Mode: {{ invoice.payment_mode }}</p>
+    <hr>
+    <h3>Product Cart</h3>
+    {% if invoice.cart_items %}
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>S. No.</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Selling Price</th>
+            <th>Quantity</th>
+            <th>Subtotal Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in invoice.cart_items.all %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ item.product.product_id }}</td>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.product.category.name }}</td>
+              <td>{{ item.product.selling_price }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.total_price }}</td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="6" class="text-end fw-bold">Grand Total</td>
+            <td>{{ invoice.grand_total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    {% else %}
+      <div class="alert alert-warning text-center" role="alert">
+        No items in cart.
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
