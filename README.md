@@ -3,4 +3,7 @@
 • Includes features such as real-time stock updates and bill generation. <br>
 • Utilized HTML, CSS, Javascript, Django, SQL, Bootstrap. <br> 
 <br> 
-See Live project : https://nt.rajesh7kumbhar.repl.co/
+• See Live project: https://nt.rajesh7kumbhar.repl.co/   <br> 
+&emsp;Login credentials: <br>
+&emsp;&emsp;User name: admin <br>
+&emsp;&emsp;Password: admin 
